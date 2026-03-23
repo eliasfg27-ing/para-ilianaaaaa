@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Iliana 💛</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #0d1b2a, #000814);
+}
+
+/* 🌟 estrellas */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    animation: twinkle 2s infinite;
+}
+@keyframes twinkle {
+    50% {opacity: 1;}
+    0%,100% {opacity: 0.2;}
+}
+
+/* 🌳 árbol */
+.tree {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    animation: latido 2s infinite;
+}
+@keyframes latido {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* tronco */
+.trunk {
+    width: 40px;
+    height: 160px;
+    background: linear-gradient(#5a2e0c, #8B4513);
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 130px;
+    transform-origin: bottom;
+    animation: growTrunk 3s forwards;
+}
+
+/* ramas */
+.branch {
+    position: absolute;
+    width: 80px;
+    height: 10px;
+    background: linear-gradient(#5a2e0c, #8B4513);
+    border-radius: 10px;
+}
+.b1 { bottom:100px; left:150px; transform: rotate(30deg) scaleX(0); animation: growB1 2s forwards 2s; }
+.b2 { bottom:120px; left:120px; transform: rotate(-30deg) scaleX(0); animation: growB2 2s forwards 2.2s; }
+.b3 { bottom:140px; left:150px; transform: rotate(50deg) scaleX(0); animation: growB3 2s forwards 2.4s; }
+.b4 { bottom:150px; left:110px; transform: rotate(-50deg) scaleX(0); animation: growB4 2s forwards 2.6s; }
+
+@keyframes growB1 { to { transform: rotate(30deg) scaleX(1); } }
+@keyframes growB2 { to { transform: rotate(-30deg) scaleX(1); } }
+@keyframes growB3 { to { transform: rotate(50deg) scaleX(1); } }
+@keyframes growB4 { to { transform: rotate(-50deg) scaleX(1); } }
+
+@keyframes growTrunk {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+/* flores */
+.tree-flower {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    transform: scale(0);
+    animation: bloom 1s forwards, glow 2s infinite;
+}
+@keyframes bloom { to { transform: scale(1); } }
+@keyframes glow {
+    0%,100% { filter: brightness(1); }
+    50% { filter: brightness(1.8); }
+}
+.petal {
+    width: 8px;
+    height: 12px;
+    background: yellow;
+    position: absolute;
+    border-radius: 50%;
+}
+.center {
+    width: 8px;
+    height: 8px;
+    background: orange;
+    border-radius: 50%;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+
+/* 💌 sobre */
+.envelope {
+    margin-top: 20px;
+    width: 220px;
+    height: 130px;
+    background: #ffcc00;
+    position: relative;
+    border-radius: 10px;
+    cursor: pointer;
+    animation: latidoCarta 2s infinite;
+}
+
+@keyframes latidoCarta {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+}
+
+/* ✍️ nombre centrado correcto */
+.nombre-sobre {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    font-family: 'Brush Script MT', cursive;
+    font-size: 36px;
+    color: white;
+
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid white;
+
+    width: 0;
+    text-align: center;
+
+    text-shadow: 0 0 10px rgba(255,255,255,0.9);
+
+    animation: escribir 2.5s steps(10) forwards,
+               parpadeo 0.7s infinite;
+}
+
+@keyframes escribir {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes parpadeo {
+    50% { border-color: transparent; }
+}
+
+.flap {
+    position: absolute;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-bottom: 65px solid #e6b800;
+    top: -65px;
+    transition: 0.5s;
+    transform-origin: bottom;
+}
+
+.letter {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background: white;
+    top: 5%;
+    left: 5%;
+    border-radius: 10px;
+    opacity: 0;
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.open .flap { transform: rotateX(180deg); }
+.open .letter { opacity: 1; }
+
+/* indicador */
+.hint {
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    text-shadow: 0 0 6px white;
+    animation: fadeHint 2s infinite;
+}
+@keyframes fadeHint {
+    0%,100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* nombre centro */
+.nombre {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 42px;
+    color: #ffcc00;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255,255,255,0.9);
+    animation: aparecerNombre 2s forwards 4s;
+}
+@keyframes aparecerNombre {
+    to { transform: translate(-50%, -50%) scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="musica" loop preload="auto">
+    <source src="Todo-por-su-amor.mp3" type="audio/mpeg">
+</audio>
+
+<div class="tree" id="tree">
+    <div class="trunk"></div>
+    <div class="branch b1"></div>
+    <div class="branch b2"></div>
+    <div class="branch b3"></div>
+    <div class="branch b4"></div>
+</div>
+
+<div class="envelope" onclick="abrirCarta(event, this)">
+    <div class="nombre-sobre">Iliana</div>
+    <div class="flap"></div>
+    <div class="letter">
+        Eres tan especial y solo puedo decirte que cada día te quiero más 🌼
+    </div>
+    <div class="hint">toca aquí ✨</div>
+</div>
+
+<script>
+/* estrellas */
+for (let i = 0; i < 100; i++) {
+    let s = document.createElement("div");
+    s.className = "star";
+    s.style.top = Math.random()*100+"%";
+    s.style.left = Math.random()*100+"%";
+    document.body.appendChild(s);
+}
+
+/* flores corazón */
+const tree = document.getElementById("tree");
+
+function crearFlorArbol(x, y, delay) {
+    let f = document.createElement("div");
+    f.className = "tree-flower";
+    f.style.left = x + "px";
+    f.style.top = y + "px";
+    f.style.animationDelay = delay + "s";
+
+    for(let i=0;i<6;i++){
+        let p = document.createElement("div");
+        p.className = "petal";
+        p.style.transform = "rotate("+(i*60)+"deg) translateY(-6px)";
+        f.appendChild(p);
+    }
+
+    let c = document.createElement("div");
+    c.className = "center";
+    f.appendChild(c);
+
+    tree.appendChild(f);
+}
+
+let scale = 8;
+for (let i = 0; i < 800; i++) {
+    let t = Math.random() * Math.PI * 2;
+    let x = 16 * Math.pow(Math.sin(t), 3);
+    let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+    let factor = Math.random();
+    x *= factor;
+    y *= factor;
+    crearFlorArbol(150 + x * scale, 120 + y * scale, Math.random()*2+2);
+}
+
+/* carta + música */
+function abrirCarta(e, el){
+    e.stopPropagation();
+    el.classList.toggle("open");
+    document.getElementById("musica").play().catch(()=>{});
+}
+</script>
+
+</body>
+</html>
